@@ -5,7 +5,7 @@ API REST para extração de Vetor de Palavras
 ## Motivação
 Várias aplicações de processamento de linguagem natural necessitam que o texto seja formatado de forma estruturada, diferente da linguagem natural. Uma solução para isso é organizar as palavras do texto em um vetor que represente o documento em termos das palavras que ocorrem no mesmo.
 
-## solução
+## Solução
 Criação de uma API REST que permita a um usuário enviar textos de entrada e que gere como resultado o vocabulário formado pelas palavras dos textos e o vetor de palavras.
 
 ## Arquitetura AWS
