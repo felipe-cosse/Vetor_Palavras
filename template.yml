@@ -1,6 +1,10 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Resources:
+  HttpApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      StageName: Prod
   LamdbaFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -10,12 +14,18 @@ Resources:
       Policies:
         - AmazonDynamoDBFullAccess
         - AWSLambdaBasicExecutionRole
+        - AWSLambdaVPCAccessExecutionRole
+        - CloudWatchLogsFullAccess
       Events:
         vetorpalavra:
           Type: Api
           Properties:
             Path: /vetor_palavras
             Method: ANY
+            RestApiId: 
+              Ref: HttpApi
+            Auth:
+              Authorizer: null
   vetor_palavras:
     Type: AWS::DynamoDB::Table
     Properties: 
