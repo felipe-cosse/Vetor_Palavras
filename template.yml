@@ -10,6 +10,10 @@ Resources:
        Authorizers:
          MyLambdaTokenAuthorizer:
            FunctionArn: !GetAtt LamdbaFunction.Arn
+       Cors:
+        AllowMethods: "'*'"
+        AllowHeaders: "'*'"
+        AllowOrigin: "'*'"
   LamdbaFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -32,7 +36,15 @@ Resources:
                 - Effect: Allow
                   Action:
                     - dynamodb:*
-                  Resource: 'arn:aws:dynamodb:*:*:table/dynamo_db_table_endpoint'            
+                  Resource: 'arn:aws:dynamodb:*:*:table/dynamo_db_table_endpoint'
+            ListFunctionCors:
+              Type: Api
+              Properties:
+                RestApiId: !Ref ApiGatewayApi
+                Path: /list
+                Method: OPTIONS
+                Auth:
+                  Authorizer: null         
   vetor_palavras:
     Type: AWS::DynamoDB::Table
     Properties: 
