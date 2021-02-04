@@ -6,7 +6,10 @@ Resources:
     Properties:
       StageName: Prod
     Auth:
-     DefaultAuthorizer: AWS_IAM
+     DefaultAuthorizer: MyLambdaTokenAuthorizer
+     Authorizers:
+        MyLambdaTokenAuthorizer:
+          FunctionArn: !GetAtt MyAuthFunction.Arn
      UsagePlan:
       CreateUsagePlan: PER_API
       Description: Usage plan for this API
@@ -16,6 +19,12 @@ Resources:
       Throttle:
        BurstLimit: 100
        RateLimit: 50
+  MyAuthFunction:
+   Type: AWS::Serverless::Function
+   Properties:
+     CodeUri: ./src
+     Handler: authorizer.handler
+     Runtime: nodejs12.x
   LamdbaFunction:
     Type: AWS::Serverless::Function
     Properties:
