@@ -5,6 +5,8 @@ Resources:
     Type: AWS::Serverless::HttpApi
     Properties:
       StageName: Prod
+    Auth:
+      Authorizer: None
   VetorPalavrasApp:
     Type: AWS::Serverless::Function
     Properties:
@@ -32,6 +34,9 @@ Resources:
       AttributeDefinitions: 
         - AttributeName: eventDateTime
           AttributeType: S
+      KeySchema: 
+        - AttributeName: "eventDateTime"
+          KeyType: "HASH"
       ProvisionedThroughput: 
         ReadCapacityUnits: 5
         WriteCapacityUnits: 5
