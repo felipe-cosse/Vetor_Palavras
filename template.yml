@@ -10,10 +10,8 @@ Resources:
       Policies:
         - AmazonDynamoDBFullAccess
         - AWSLambdaBasicExecutionRole
-        - AWSLambdaVPCAccessExecutionRole
-        - CloudWatchLogsFullAccess
       Events:
-        AddItem:
+        vetorpalavra:
           Type: Api
           Properties:
             Path: /vetor_palavras
