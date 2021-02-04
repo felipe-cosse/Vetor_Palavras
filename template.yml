@@ -1,20 +1,10 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Resources:
-  ApiGatewayApi:
+  HttpApi:
     Type: AWS::Serverless::HttpApi
     Properties:
       StageName: Prod
-      Auth:
-        UsagePlan:
-          CreateUsagePlan: PER_API
-          Description: Usage plan for this API
-          Quota:
-          Limit: 500
-          Period: MONTH
-          Throttle:
-          BurstLimit: 100
-          RateLimit: 50
   LamdbaFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -33,7 +23,7 @@ Resources:
             Path: /vetor_palavras
             Method: ANY
             RestApiId: 
-              Ref: ApiGatewayApi
+              Ref: HttpApi
   vetor_palavras:
     Type: AWS::DynamoDB::Table
     Properties: 
