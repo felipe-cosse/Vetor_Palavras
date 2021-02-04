@@ -6,10 +6,16 @@ Resources:
     Properties:
       StageName: Prod
     Auth:
-       DefaultAuthorizer: MyLambdaTokenAuthorizer
-       Authorizers:
-         MyLambdaTokenAuthorizer:
-           FunctionArn: !GetAtt LamdbaFunction.Arn
+        DefaultAuthorizer: MyLambdaTokenAuthorizer
+        Authorizers:
+          MyLambdaRequestAuthorizer:
+            FunctionArn: !GetAtt LamdbaFunction.Arn
+            FunctionInvokeRole: !GetAtt LamdbaFunction.Arn
+            Identity:
+              Headers:
+                - Authorization
+            AuthorizerPayloadFormatVersion: 2.0
+            EnableSimpleResponses: true
   LamdbaFunction:
     Type: AWS::Serverless::Function
     Properties:
