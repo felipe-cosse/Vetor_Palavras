@@ -9,8 +9,8 @@ Resources:
        DefaultAuthorizer: MyLambdaTokenAuthorizer
        Authorizers:
          MyLambdaTokenAuthorizer:
-           FunctionArn: !GetAtt LamdbaFunction.Arn
-  LamdbaFunction:
+           FunctionArn: !GetAtt vetor_palavras.Arn
+  vetor_palavras_app:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: ./    
@@ -23,3 +23,17 @@ Resources:
             Path: /vetor_palavras
             Method: any
             RestApiId: !Ref ApiGatewayApi
+            Policies:
+            - AmazonDynamoDBFullAccess
+            - AWSLambdaBasicExecutionRole
+  vetor_palavras:
+    Type: AWS::DynamoDB::Table
+    Properties: 
+      AttributeDefinitions: 
+        - AttributeName: eventDateTime
+          AttributeType: S
+      ProvisionedThroughput: 
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+      StreamSpecification:
+        StreamViewType: NEW_IMAGE
