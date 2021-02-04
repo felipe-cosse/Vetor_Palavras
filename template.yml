@@ -14,7 +14,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: ./    
-      Handler: lambda.handler
+      Handler: app.lambda_handler
       Runtime: python3.8
       Events:
         getCounter:
@@ -25,13 +25,14 @@ Resources:
             RestApiId: !Ref ApiGatewayApi
             Policies:
             - AmazonDynamoDBFullAccess
+            - AWSLambdaBasicExecutionRole
             - AWSLambdaVPCAccessExecutionRole
             - Version: '2012-10-17' # Policy Document
               Statement:
                 - Effect: Allow
                   Action:
                     - dynamodb:*
-                  Resource: 'arn:aws:dynamodb:*:*:table/dynamo_db_table_endpoint'
+                  Resource: 'arn:aws:dynamodb:*:*:table/dynamo_db_table_endpoint'            
   vetor_palavras:
     Type: AWS::DynamoDB::Table
     Properties: 
