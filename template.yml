@@ -9,8 +9,8 @@ Resources:
        DefaultAuthorizer: MyLambdaTokenAuthorizer
        Authorizers:
          MyLambdaTokenAuthorizer:
-           FunctionArn: !GetAtt vetor_palavras.Arn
-  vetor_palavras_app:
+           FunctionArn: !GetAtt LamdbaFunction.Arn
+  LamdbaFunction:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: ./    
