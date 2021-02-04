@@ -33,7 +33,7 @@ Resources:
             Path: /vetor_palavras
             Method: ANY
             RestApiId: 
-              Ref: HttpApi
+              Ref: ApiGatewayApi
             Auth:
               Authorizer: null
   vetor_palavras:
