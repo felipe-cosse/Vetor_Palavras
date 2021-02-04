@@ -18,7 +18,7 @@ Resources:
   LamdbaFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: ./src    
+      CodeUri: ./
       Handler: app.lambda_handler
       Runtime: python3.8
       Events:
