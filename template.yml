@@ -1,7 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: >
-  GitHub Actions demonstration App
 Resources:
   ApiGatewayApi:
     Type: AWS::Serverless::Api
@@ -20,13 +18,29 @@ Resources:
   LamdbaFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: ./    
-      Handler: lambda.handler
+      CodeUri: ./src    
+      Handler: app.lambda_handler
       Runtime: python3.8
       Events:
         getCounter:
           Type: Api
           Properties:
-            Path: /hello
-            Method: get
+            Path: /vetor_palavras
+            Method: ANY
             RestApiId: !Ref ApiGatewayApi
+            Policies:
+            - AmazonDynamoDBFullAccess
+            - AWSLambdaBasicExecutionRole
+            - AWSLambdaVPCAccessExecutionRole
+            - CloudWatchLogsFullAccess 
+  vetor_palavras:
+    Type: AWS::DynamoDB::Table
+    Properties: 
+      AttributeDefinitions: 
+        - AttributeName: eventDateTime
+          AttributeType: S
+      ProvisionedThroughput: 
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+      StreamSpecification:
+        StreamViewType: NEW_IMAGE
