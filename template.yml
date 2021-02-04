@@ -28,11 +28,11 @@ Resources:
             Path: /vetor_palavras
             Method: ANY
             RestApiId: !Ref ApiGatewayApi
-            Policies:
-            - AmazonDynamoDBFullAccess
-            - AWSLambdaBasicExecutionRole
-            - AWSLambdaVPCAccessExecutionRole
-            - CloudWatchLogsFullAccess 
+      Policies:
+        - AmazonDynamoDBFullAccess
+        - AWSLambdaBasicExecutionRole
+        - AWSLambdaVPCAccessExecutionRole
+        - CloudWatchLogsFullAccess 
   vetor_palavras:
     Type: AWS::DynamoDB::Table
     Properties: 
