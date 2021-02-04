@@ -6,6 +6,10 @@ Resources:
     Properties:
       StageName: Prod
     Auth:
+     DefaultAuthorizer: MyLambdaTokenAuthorizer
+        Authorizers:
+          MyLambdaTokenAuthorizer:
+            FunctionArn: !GetAtt LamdbaFunction.Arn
      UsagePlan:
       CreateUsagePlan: PER_API
       Description: Usage plan for this API
@@ -19,7 +23,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: ./
-      Handler: app.lambda_handler
+      Handler: lambda_function.handler
       Runtime: python3.8
       Events:
         getCounter:
