@@ -10,10 +10,6 @@ Resources:
        Authorizers:
          MyLambdaTokenAuthorizer:
            FunctionArn: !GetAtt LamdbaFunction.Arn
-       Cors:
-        AllowMethods: "'*'"
-        AllowHeaders: "'*'"
-        AllowOrigin: "'*'"
   LamdbaFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -25,26 +21,13 @@ Resources:
           Type: Api
           Properties:
             Path: /vetor_palavras
-            Method: any
+            Method: ANY
             RestApiId: !Ref ApiGatewayApi
             Policies:
             - AmazonDynamoDBFullAccess
             - AWSLambdaBasicExecutionRole
             - AWSLambdaVPCAccessExecutionRole
-            - Version: '2012-10-17' # Policy Document
-              Statement:
-                - Effect: Allow
-                  Action:
-                    - dynamodb:*
-                  Resource: 'arn:aws:dynamodb:*:*:table/dynamo_db_table_endpoint'
-            ListFunctionCors:
-              Type: Api
-              Properties:
-                RestApiId: !Ref ApiGatewayApi
-                Path: /list
-                Method: OPTIONS
-                Auth:
-                  Authorizer: null         
+            - CloudWatchLogsFullAccess 
   vetor_palavras:
     Type: AWS::DynamoDB::Table
     Properties: 
