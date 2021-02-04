@@ -20,7 +20,7 @@ Resources:
     Properties:
       CodeUri: ./    
       Handler: lambda.handler
-      Runtime: python3.7
+      Runtime: python3.8
       Events:
         getCounter:
           Type: Api
