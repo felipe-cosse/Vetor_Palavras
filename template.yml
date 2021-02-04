@@ -18,7 +18,7 @@ Resources:
         - CloudWatchLogsFullAccess
       Events:
         vetorpalavra:
-          Type: Api
+          Type: HttpApi
           Properties:
             Path: /vetor_palavras
             Method: ANY
