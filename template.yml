@@ -24,6 +24,8 @@ Resources:
             Method: ANY
             ApiId: 
               Ref: HttpApi
+            Auth:
+              Authorizer: null
   vetor_palavras:
     Type: AWS::DynamoDB::Table
     Properties: 
