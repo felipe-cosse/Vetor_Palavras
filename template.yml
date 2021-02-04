@@ -6,15 +6,10 @@ Resources:
     Properties:
       StageName: Prod
     Auth:
-     UsagePlan:
-      CreateUsagePlan: PER_API
-      Description: Usage plan for this API
-      Quota:
-       Limit: 100
-       Period: MONTH
-      Throttle:
-       BurstLimit: 100
-       RateLimit: 50
+       DefaultAuthorizer: MyLambdaTokenAuthorizer
+       Authorizers:
+         MyLambdaTokenAuthorizer:
+           FunctionArn: !GetAtt LamdbaFunction.Arn
   LamdbaFunction:
     Type: AWS::Serverless::Function
     Properties:
