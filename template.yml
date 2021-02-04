@@ -6,10 +6,13 @@ Resources:
     Properties:
       StageName: Prod
     Auth:
-     DefaultAuthorizer: MyLambdaTokenAuthorizer
-     Authorizers:
-        MyLambdaTokenAuthorizer:
-          FunctionArn: !GetAtt MyAuthFunction.Arn
+     ResourcePolicy:
+        CustomStatements: {
+            Effect: 'Allow',
+            Action: 'execute-api:Invoke', 
+            Resource: ['execute-api:/*/*/*'],
+            Principal: '*'
+          }
      UsagePlan:
       CreateUsagePlan: PER_API
       Description: Usage plan for this API
@@ -19,12 +22,6 @@ Resources:
       Throttle:
        BurstLimit: 100
        RateLimit: 50
-  MyAuthFunction:
-   Type: AWS::Serverless::Function
-   Properties:
-     CodeUri: ./src
-     Handler: authorizer.handler
-     Runtime: nodejs12.x
   LamdbaFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -37,12 +34,13 @@ Resources:
         - AWSLambdaVPCAccessExecutionRole
         - CloudWatchLogsFullAccess
       Events:
-        getCounter:
+        AddItem:
           Type: Api
           Properties:
             Path: /vetor_palavras
             Method: post
-            RestApiId: !Ref ApiGatewayApi
+            RestApiId: 
+              Ref: ApiGatewayApi
   vetor_palavras:
     Type: AWS::DynamoDB::Table
     Properties: 
