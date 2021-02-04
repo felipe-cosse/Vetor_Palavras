@@ -6,6 +6,7 @@ Resources:
     Properties:
       StageName: Prod
     Auth:
+      DefaultAuthorizer: OAuth2Authorizer
       Authorizer: None
   VetorPalavrasApp:
     Type: AWS::Serverless::Function
