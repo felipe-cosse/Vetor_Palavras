@@ -7,7 +7,7 @@ Resources:
       StageName: Prod
     Auth:
      DefaultAuthorizer: MyLambdaTokenAuthorizer
-        Authorizers:
+     Authorizers:
           MyLambdaTokenAuthorizer:
             FunctionArn: !GetAtt LamdbaFunction.Arn
      UsagePlan:
@@ -25,18 +25,18 @@ Resources:
       CodeUri: ./
       Handler: lambda_function.handler
       Runtime: python3.8
+      Policies:
+        - AmazonDynamoDBFullAccess
+        - AWSLambdaBasicExecutionRole
+        - AWSLambdaVPCAccessExecutionRole
+        - CloudWatchLogsFullAccess
       Events:
         getCounter:
           Type: Api
           Properties:
             Path: /vetor_palavras
             Method: ANY
-            RestApiId: !Ref ApiGatewayApi
-      Policies:
-        - AmazonDynamoDBFullAccess
-        - AWSLambdaBasicExecutionRole
-        - AWSLambdaVPCAccessExecutionRole
-        - CloudWatchLogsFullAccess 
+            RestApiId: !Ref ApiGatewayApi            
   vetor_palavras:
     Type: AWS::DynamoDB::Table
     Properties: 
