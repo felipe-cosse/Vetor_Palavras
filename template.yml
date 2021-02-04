@@ -6,13 +6,6 @@ Resources:
     Properties:
       StageName: Prod
     Auth:
-     ResourcePolicy:
-        CustomStatements: {
-            Effect: 'Allow',
-            Action: 'execute-api:Invoke', 
-            Resource: ['execute-api:/*/*/*'],
-            Principal: '*'
-          }
      UsagePlan:
       CreateUsagePlan: PER_API
       Description: Usage plan for this API
@@ -38,7 +31,7 @@ Resources:
           Type: Api
           Properties:
             Path: /vetor_palavras
-            Method: post
+            Method: ANY
             RestApiId: 
               Ref: ApiGatewayApi
   vetor_palavras:
