@@ -5,7 +5,7 @@ Resources:
     Type: AWS::Serverless::HttpApi
     Properties:
       StageName: Prod
-  vetor_palavras_app:
+  VetorPalavrasApp:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: ./
@@ -17,15 +17,13 @@ Resources:
         - AWSLambdaVPCAccessExecutionRole
         - CloudWatchLogsFullAccess
       Events:
-        addItem:
+        HttpApiEvent:
           Type: HttpApi
           Properties:
             Path: /vetor_palavras
             Method: ANY
             ApiId: 
               Ref: HttpApi
-            Auth:
-              Authorizer: null
   vetor_palavras:
     Type: AWS::DynamoDB::Table
     Properties: 
