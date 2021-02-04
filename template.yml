@@ -6,10 +6,7 @@ Resources:
     Properties:
       StageName: Prod
     Auth:
-     DefaultAuthorizer: MyLambdaTokenAuthorizer
-     Authorizers:
-          MyLambdaTokenAuthorizer:
-            FunctionArn: !GetAtt LamdbaFunction.Arn
+     DefaultAuthorizer: AWS_IAM
      UsagePlan:
       CreateUsagePlan: PER_API
       Description: Usage plan for this API
@@ -35,8 +32,8 @@ Resources:
           Type: Api
           Properties:
             Path: /vetor_palavras
-            Method: ANY
-            RestApiId: !Ref ApiGatewayApi            
+            Method: post
+            RestApiId: !Ref ApiGatewayApi
   vetor_palavras:
     Type: AWS::DynamoDB::Table
     Properties: 
