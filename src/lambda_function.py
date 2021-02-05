@@ -52,7 +52,7 @@ def salva_dynamo(num_gram, list_texto, result):
         print('Erro Salvar Dynamo')
     
 
-def lambda_handler(event, context):
+def handler(event, context):
     num_gram = event['gram']
     list_texto = event['texto']
     
