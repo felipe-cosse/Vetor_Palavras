@@ -11,7 +11,7 @@ resource "aws_lambda_function" "vetorpalavrasapp" {
   filename      = "lambda_function_payload.zip"
   function_name = var.lambda_function_name
   role          = aws_iam_role.lambda.arn
-  handler       = "lambda_function.handler"
+  handler       = "lambda_function.lambda_handler"
 
   source_code_hash = filebase64sha256("lambda_function_payload.zip")
 
