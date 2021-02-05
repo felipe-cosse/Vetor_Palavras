@@ -35,7 +35,7 @@ def salva_dynamo(num_gram, list_texto, result):
     dynamodb = boto3.resource('dynamodb')
     client = boto3.client('dynamodb')
     
-    tableVetorPalavras = dynamodb.Table('vetor_palavras')
+    tableVetorPalavras = dynamodb.Table('vetor_palavras_tb')
     
     eventDateTime = (datetime.now()).strftime("%Y-%m-%d %H:%M:%S")
     
