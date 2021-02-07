@@ -4,6 +4,6 @@ terraform {
     bucket = "s3-lambdaapps-261358786165"
     region = "us-east-2"
     key = "terraform.tfstate"
-    #profile = "felipe"
+    profile = "felipe"
   }
 }
