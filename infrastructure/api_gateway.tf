@@ -60,5 +60,6 @@ resource "aws_api_gateway_method_settings" "all" {
 
   settings {
     metrics_enabled = false
+    data_trace_enabled = false
   }
 }
